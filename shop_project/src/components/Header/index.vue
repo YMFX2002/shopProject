@@ -53,6 +53,8 @@
 </template>
 
 <script>
+
+
 export default {
     data(){
         return {
@@ -62,9 +64,19 @@ export default {
     },
     methods:{
         goSearch(){
+          if (this.$route.query){
             // this.$router.push('/search/'+this.keyWord+'?k='+this.keyWord.toUpperCase())
-            this.$router.push({name:'search',params:{keyWord:this.keyWord},query:{keyWord:this.keyWord.toUpperCase()}})
+           let location = {name:'search',params:{keyWord:this.keyWord}}
+            location.query = this.$route.query
+            this.$router.push(location)
+          }
         }
+    },
+    mounted(){
+      //通过全局总线来清除关键字
+      this.$bus.$on('clear',()=>{
+        this.keyWord=''
+      })
     }
 }
 </script>

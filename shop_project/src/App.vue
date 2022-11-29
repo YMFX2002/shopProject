@@ -19,6 +19,10 @@ export default {
   components: {
     Header,
     Footer
+  },
+  mounted(){
+    //派发action 一次性获取到三级列表的数据
+    this.$store.dispatch("categoryList");
   }
 }
 </script>

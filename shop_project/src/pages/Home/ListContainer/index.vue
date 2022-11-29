@@ -4,33 +4,25 @@
             <div class="sortList clearfix">
                 <div class="center">
                     <!--banner轮播-->
-                    <div class="swiper-container" id="mySwiper">
+                    <!-- <div class="swiper-container" ref="mySwiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img src="./images/banner1.jpg" />
+                            <div class="swiper-slide" v-for="carousel in getBannerList" :key="carousel.id">
+                                <img :src="carousel.imgUrl" />
                             </div>
-                            <!-- <div class="swiper-slide">
-                                <img src="./images/banner2.jpg" />
-                            </div>
-                            <div class="swiper-slide">
-                                <img src="./images/banner3.jpg" />
-                            </div>
-                            <div class="swiper-slide">
-                                <img src="./images/banner4.jpg" />
-                            </div> -->
                         </div>
-                        <!-- 如果需要分页器 -->
+                        如果需要分页器
                         <div class="swiper-pagination"></div>
 
-                        <!-- 如果需要导航按钮 -->
+                        如果需要导航按钮
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
-                    </div>
+                    </div> -->
+                    <Carousel :list="getBannerList"></Carousel>
                 </div>
                 <div class="right">
                     <div class="news">
                         <h4>
-                            <em class="fl">尚品汇快报</em>
+                            <em class="fl">京东快报</em>
                             <span class="fr tip">更多 ></span>
                         </h4>
                         <div class="clearix"></div>
@@ -112,8 +104,61 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-    name:'ListContainer'
+    name:'ListContainer',
+    mounted(){
+        
+        this.$store.dispatch('getBannerList')
+        // setTimeout(() => {
+        //     var mySwiper = new Swiper(document.querySelector(".swiper-container"),{
+        //         loop:true,
+        //         pagination:{
+        //             el:".swiper-pagination",
+        //             clickable:true
+        //         },
+        //         navigation:{
+        //             nextEl:".swiper-button-next",
+        //             prevEl:".swiper-button-prev"
+        //         }
+        //     })
+        // }, 1000); 
+    },
+    computed:{
+        ...mapState({
+            getBannerList:(state)=>state.Home.getBannerList
+        })
+    },
+    //watch监听getBannerList属性的属性值的变化
+    //执行watch时只能说getBannerList中有数据了 但是不能保证循环执行完了 不能保证数据的完整性
+    // watch:{
+    //     getBannerList:{
+    //         //handler是一个固有的函数 
+    //         handler(newValue,oldValue){
+    //             //nextTick 在下次dom更新前 循环结束之后 执行延迟回调 。在修改数据之后 立即使用这个方法 来获取更新后的dom
+    //             this.$nextTick(()=>{
+    //                 //执行这个回调的时候 保证服务器的数据已经回来了 v-for中的数据已经循环回来执行完毕了（轮播图的完整结构已经有了）
+    //                 var mySwiper = new Swiper(
+    //                     // document.querySelector(".swiper-container")
+    //                     this.$refs.mySwiper
+    //                     ,
+    //                     {
+    //                     loop:true,
+    //                     pagination:{
+    //                         el:".swiper-pagination",
+    //                         clickable:true
+    //                     },
+    //                     navigation:{
+    //                         nextEl:".swiper-button-next",
+    //                         prevEl:".swiper-button-prev"
+    //                     }
+    //                 })
+    //             })
+               
+    //         }
+    //     }
+    // }
 
 }
 </script>
