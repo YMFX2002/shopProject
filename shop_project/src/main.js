@@ -23,6 +23,9 @@ Vue.component(Carousel.name,Carousel)
 // import { reqGetSearchInfo }  from '@/api'
 // console.log(reqGetSearchInfo({}));
 
+import Pagination from '@/components/Pagination'
+Vue.component(Pagination.name, Pagination)
+
 
 Vue.config.productionTip = false
 

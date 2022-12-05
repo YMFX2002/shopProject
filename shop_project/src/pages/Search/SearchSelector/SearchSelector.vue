@@ -16,7 +16,7 @@
       <div class="fl key">{{attr.attrName}}</div>
       <div class="fl value" >
         <ul class="type-list">
-          <li v-for="(attrValue,index) in attr.attrValueList" :key="index" @click="attrInfo(attrId,attrName,attrValue)">
+          <li v-for="(attrValue,index) in attr.attrValueList" :key="index" @click="attrInfoN(attr,attrValue)">
             <a>{{attrValue}}</a>
           </li>
         </ul>
@@ -40,6 +40,9 @@ import { mapGetters } from 'vuex'
         //在父组件中发请求 因为父组件中的searchParams参数是向服务器进行传递数据的 子组件需要把点击的事件传递给父组件 这里使用了自定义事件
         this.$emit('trademarkInfo',trademark)
       },
+      attrInfoN(attr,attrValue){
+        this.$emit('attrInfo',attr,attrValue)
+      }
       
     }
 

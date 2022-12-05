@@ -13,7 +13,7 @@ const mutations = {
 const actions = {
     async getSearchInfo({commit},params={}){
         let result = await reqGetSearchInfo(params);
-        console.log(result);
+        // console.log(result);
         if(result.code == 200){
             commit('SEARCH_LIST',result.data)
         }

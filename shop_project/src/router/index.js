@@ -5,6 +5,7 @@ import Home from '@/pages/Home'
 import Search from '@/pages/Search'
 import Login from '@/pages/Login'
 import Register from '@/pages/Register'
+import Detail from '@/pages/Detail'
 
 //使用
 Vue.use(VueRouter)
@@ -23,6 +24,12 @@ VueRouter.prototype.push = function push(location) {
 //配置路由
 export default new VueRouter({
     routes:[
+        {
+            path:'/detail',
+            name:'Detail',
+            component:Detail,
+            meta:{show:true}
+        },
         {
             path:'/home',
             name:'Home',
@@ -51,6 +58,11 @@ export default new VueRouter({
             path:'/',
             redirect:'/home'
         }
-    ]
+    ],
+    //滚动行为
+    scrollBehavior(to,from,savedPosition){
+        //y=0 设置滚动条在最上方
+        return {y:0}
+    }
    
 })
