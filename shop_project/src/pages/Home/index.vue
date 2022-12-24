@@ -31,6 +31,7 @@ export default {
   //派发action
     mounted(){
         this.$store.dispatch('getFloorList')
+        this.$store.dispatch('getUserInfo')
 
     },
     //仓库

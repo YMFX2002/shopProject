@@ -6,7 +6,7 @@ import Search from '@/pages/Search'
 import Login from '@/pages/Login'
 import Register from '@/pages/Register'
 import Detail from '@/pages/Detail'
-
+import store from '@/store'
 //使用
 Vue.use(VueRouter)
 
@@ -22,7 +22,7 @@ VueRouter.prototype.push = function push(location) {
 
 
 //配置路由
-export default new VueRouter({
+let router = new VueRouter({
     routes:[
         {
             path:'/detail',
@@ -66,3 +66,44 @@ export default new VueRouter({
     }
    
 })
+
+
+//全局前置守卫（路由跳转之前进行判断）
+// router.beforeEach(async (to,from,next)=>{
+//     //to：获取到要跳转的路由信息        去哪
+//     //from：获取到路由信息是从哪里来的   从哪来
+//     //next：放行函数                   放行到指定路由  next('/path')
+//     next()
+//     // console.log(store.state.User.token);
+//     //用户登录才会有token
+//     let token = store.state.User.token
+//     if(token){
+//         //用户登录之后不能再去到login页面 去home页
+//         if(to.path == '/login' || to.path == '/register'){
+//             next('/home')
+//         }else{
+//             //登录了但去到的不是login
+//             //如果用户名存在
+//             if(store.state.User.userInfo.name){
+//                 next()
+//             }else{
+//                 //如果没有用户名信息 派发action让仓库存储用户信息再跳转
+//                 try {
+//                     //获取用户信息成功
+//                     await store.dispatch('getUserInfo')
+//                     next()
+//                 } catch (error) {
+//                     //token失效 获取不到用户的信息
+//                     //清除token
+//                     await store.dispatch('userLogout')
+//                     next('/login')
+//                 }    
+//             }
+//         }
+//     }else{
+//         //未登录
+//         // next()
+//     }
+// })
+
+export default router

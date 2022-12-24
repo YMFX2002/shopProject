@@ -11,7 +11,7 @@ import store from './store'
 Vue.config.devtools = true
 
 //引入mock模拟数据
-import '@/mock/mockServer'
+import '@/mock/mockServer' 
 
 //引入swiper轮播图样式
 import 'swiper/css/swiper.css'

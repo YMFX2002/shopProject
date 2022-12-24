@@ -10,7 +10,7 @@ const mutations = {
 }
 const actions = {
     async getGoodsInfo({commit},skuId){
-        const result = await reqGoodsInfo(skuId)
+        let result = await reqGoodsInfo(skuId)
         console.log(result);
         console.log("111111111111111111111111111111");
         if(result.code == 200 ){

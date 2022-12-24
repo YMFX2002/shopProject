@@ -9,10 +9,19 @@
           <div class="container">
             <div class="loginList">
               <p>欢迎打开京东首页</p>
-              <p>
+              <!-- 没有用户名时 -->
+              <p v-if="!userName">
                  <router-link to="/login">你好！请登录</router-link>
                 <router-link to="/register" class="register"> 免费注册</router-link> 
               </p>
+
+              <!-- 有用户名时 用户登录后 -->
+              <p v-else>
+                 <router-link to="/login">{{userName}}</router-link>
+                <!-- <router-link to="/home" class="register" @click="logout">退出登录</router-link>  -->
+                <a class="register" @click="logout">退出登录</a>
+              </p>
+              
             </div>
             <div class="typeList">
               <a href="###">我的订单</a>
@@ -63,6 +72,7 @@ export default {
         }
     },
     methods:{
+      //搜索按钮的事件处理函数 用于跳转到search路由组件当中
         goSearch(){
           if (this.$route.query){
             // this.$router.push('/search/'+this.keyWord+'?k='+this.keyWord.toUpperCase())
@@ -70,6 +80,19 @@ export default {
             location.query = this.$route.query
             this.$router.push(location)
           }
+        },
+        //退出登录
+        async logout(){
+          try {
+            // 发请求 通知服务器退出登录 清除token数据
+            // 清除项目当中的数据 userInfo token
+            // 退出成功 回到首页
+            await this.$store.dispatch('userLogout')
+            this.$router.push('/home')
+          } catch (error) {
+            
+          }
+          
         }
     },
     mounted(){
@@ -77,6 +100,13 @@ export default {
       this.$bus.$on('clear',()=>{
         this.keyWord=''
       })
+    },
+    computed:{
+      //用户名信息
+      userName(){
+        return this.$store.state.User.userInfo.name
+      }
+      
     }
 }
 </script>
